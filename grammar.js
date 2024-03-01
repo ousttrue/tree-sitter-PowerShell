@@ -50,6 +50,9 @@ module.exports = grammar({
     function_definition: $ => seq(
       caseInsensitive('function'),
       /[_a-z+][_a-z0-9+]*/i,
+      optional(
+        /\([^)]*\)/,
+      ),
       $.scriptblock
     ),
 
@@ -269,7 +272,7 @@ module.exports = grammar({
       '{',
       optional($.param_block),
       statement_sequence($),
-      '}'
+      '}',
     ),
 
     param_block: $ => seq(
@@ -448,7 +451,7 @@ module.exports = grammar({
       $.double_quote_string
     ),
 
-    single_quote_string: $  => prec(PREC.STRING, /'[^']*'/),
+    single_quote_string: $ => prec(PREC.STRING, /'[^']*'/),
 
     double_quote_string: $ => prec(PREC.STRING,
       seq(
@@ -479,11 +482,11 @@ module.exports = grammar({
           ),
           '#>'
         )
-    )))
+      )))
   },
 });
 
-function caseInsensitive (keyword) {
+function caseInsensitive(keyword) {
   return new RegExp(keyword
     .split('')
     .map(letter => `[${letter}${letter.toUpperCase()}]`)
@@ -500,8 +503,7 @@ function caseInsensitiveOperator(operator) {
   return '-[Cc]?' + re;
 }
 
-function statement_sequence($)
-{
+function statement_sequence($) {
   return repeat(
     seq(
       $._statement,
@@ -510,12 +512,9 @@ function statement_sequence($)
   )
 }
 
-function delimited_seq(rule, delimiter, oneOrMore, canFollowLast)
-{
-  if (canFollowLast)
-  {
-    if (oneOrMore)
-    {
+function delimited_seq(rule, delimiter, oneOrMore, canFollowLast) {
+  if (canFollowLast) {
+    if (oneOrMore) {
       return repeat1(
         seq(
           rule,

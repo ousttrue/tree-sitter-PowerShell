@@ -11,6 +11,20 @@ See [LICENSE](LICENSE).
 
 - update "tree-sitter-cli": "^0.15.2" to "^0.21.0"
 
+```lua
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.PowerShell = {
+  install_info = {
+    url = "https://github.com/ousttrue/tree-sitter-powershell",
+    files = { "src/scanner.c", "src/parser.c" },
+    generate_requires_npm = true,
+    requires_generate_from_grammar = true,
+  },
+  filetype = "ps1",
+  used_by = { "psm1", "psd1", "pssc", "psxml", "cdxml" },
+}
+```
+
 ## Initial goal
 
 Parse the [big test file from EditorSyntax](https://github.com/PowerShell/EditorSyntax/blob/master/examples/TheBigTestFile.ps1) completely.
