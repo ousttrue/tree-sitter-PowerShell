@@ -7,6 +7,10 @@ implemenation for [PowerShell](https://github.com/PowerShell/PowerShell).
 
 See [LICENSE](LICENSE).
 
+## fork
+
+- update "tree-sitter-cli": "^0.15.2" to "^0.21.0"
+
 ## Initial goal
 
 Parse the [big test file from EditorSyntax](https://github.com/PowerShell/EditorSyntax/blob/master/examples/TheBigTestFile.ps1) completely.

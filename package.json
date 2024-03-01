@@ -13,9 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "nan": "^2.14.0"
+    "nan": "^2.18.0"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.15.2"
+    "tree-sitter-cli": "^0.21.0"
   }
 }
